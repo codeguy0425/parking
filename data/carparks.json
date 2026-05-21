@@ -1,0 +1,121 @@
+[
+  {
+    "id": "yoho-mall",
+    "name": "YOHO MALL I 形點 I",
+    "address": "朗日路8-9號及元龍街9號, 元朗",
+    "lat": 22.4444,
+    "lng": 114.0278,
+    "scheme": {
+      "round_up": true,
+      "min_hours": 1,
+      "periods": [
+        { "label": "平日 (一至五)", "from": "07:00", "to": "23:59", "hourly": 20, "days": [1,2,3,4,5] },
+        { "label": "週末/假日", "from": "07:00", "to": "23:59", "hourly": 26, "days": [0,6] }
+      ]
+    }
+  },
+  {
+    "id": "yoho-mall-2",
+    "name": "YOHO MALL II 形點 II",
+    "address": "朗日路8號, 元朗",
+    "lat": 22.4452,
+    "lng": 114.0289,
+    "scheme": {
+      "round_up": true,
+      "min_hours": 1,
+      "periods": [
+        { "label": "平日 (一至五)", "from": "07:00", "to": "23:59", "hourly": 20, "days": [1,2,3,4,5] },
+        { "label": "週末/假日", "from": "07:00", "to": "23:59", "hourly": 26, "days": [0,6] }
+      ]
+    }
+  },
+  {
+    "id": "kolour-yuen-long",
+    "name": "元朗千色匯",
+    "address": "教育路1號, 元朗",
+    "lat": 22.4420,
+    "lng": 114.0230,
+    "scheme": {
+      "round_up": true,
+      "min_hours": 1,
+      "periods": [
+        { "label": "平日 (一至五)", "from": "08:00", "to": "20:00", "hourly": 33, "days": [1,2,3,4,5] },
+        { "label": "週末/假日", "from": "08:00", "to": "20:00", "hourly": 36, "days": [0,6] },
+        { "label": "夜泊", "from": "20:00", "to": "08:00", "hourly": 16 }
+      ]
+    }
+  },
+  {
+    "id": "yuen-long-plaza",
+    "name": "元朗廣場",
+    "address": "青山公路元朗段51號",
+    "lat": 22.4435,
+    "lng": 114.0255,
+    "scheme": {
+      "round_up": true,
+      "min_hours": 1,
+      "periods": [
+        { "label": "星期一至四", "from": "07:00", "to": "23:59", "hourly": 22, "days": [1,2,3,4] },
+        { "label": "星期五至日/假日", "from": "07:00", "to": "23:59", "hourly": 26, "days": [0,5,6] }
+      ]
+    }
+  },
+  {
+    "id": "transport-plaza",
+    "name": "交通廣場",
+    "address": "元朗",
+    "lat": 22.4440,
+    "lng": 114.0260,
+    "scheme": {
+      "round_up": true,
+      "min_hours": 1,
+      "periods": [
+        { "label": "標準", "from": "07:00", "to": "23:59", "hourly": 24 }
+      ]
+    }
+  },
+  {
+    "id": "royal-court",
+    "name": "御庭居",
+    "address": "元朗",
+    "lat": 22.4410,
+    "lng": 114.0240,
+    "scheme": {
+      "round_up": true,
+      "min_hours": 1,
+      "periods": [
+        { "label": "標準", "from": "07:00", "to": "23:59", "hourly": 12 }
+      ]
+    }
+  },
+  {
+    "id": "shun-fook-barn",
+    "name": "元朗順福糧倉",
+    "address": "壽富街60號, 元朗",
+    "lat": 22.4455,
+    "lng": 114.0245,
+    "scheme": {
+      "round_up": true,
+      "min_hours": 1,
+      "periods": [
+        { "label": "平日 (一至五)", "from": "07:00", "to": "23:59", "hourly": 28, "days": [1,2,3,4,5] },
+        { "label": "週末/假日", "from": "07:00", "to": "23:59", "hourly": 32, "days": [0,6] }
+      ]
+    }
+  },
+  {
+    "id": "long-ping",
+    "name": "朗屏商場停車場",
+    "address": "朗屏路1號, 元朗",
+    "lat": 22.4470,
+    "lng": 114.0220,
+    "scheme": {
+      "round_up": true,
+      "min_hours": 1,
+      "periods": [
+        { "label": "星期一至四", "from": "07:00", "to": "23:59", "hourly": 19, "days": [1,2,3,4] },
+        { "label": "星期五至日/假日", "from": "07:00", "to": "23:59", "hourly": 24, "days": [0,5,6] }
+      ]
+    }
+  }
+]

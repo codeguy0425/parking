@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>泊車 HK</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>🅿 泊車 HK</h1>
+      <button id="btn-admin" class="header-admin-btn" title="假期管理">🗓</button>
+    </header>
+
+    <main>
+      <section id="session-section" class="hidden">
+        <div class="session-card">
+          <div class="session-header">
+            <span class="status-badge active">🟢 已入場</span>
+            <button id="btn-cancel-session" class="text-btn" title="取消">✕</button>
+          </div>
+          <div class="session-detail">
+            <span class="label">入場時間</span>
+            <input type="datetime-local" id="session-entry" class="entry-input">
+          </div>
+          <div class="session-detail timer-row">
+            <span class="label">已過時間</span>
+            <span id="session-timer" class="timer">0小時 00分 00秒</span>
+          </div>
+          <div class="session-detail">
+            <span class="label">停車場</span>
+            <select id="session-carpark" class="carpark-select">
+              <option value="">— 選擇停車場 —</option>
+            </select>
+          </div>
+          <div id="session-est-row" class="session-detail hidden">
+            <span class="label">收費</span>
+            <span id="session-rate-display"></span>
+          </div>
+          <div id="session-fee-row" class="session-detail hidden">
+            <span class="label">預計費用</span>
+            <span id="session-est-fee" class="est-fee"></span>
+          </div>
+          <div class="session-detail">
+            <span class="label">備註</span>
+            <input type="text" id="session-notes" placeholder="例如：B2, 近電梯" class="notes-input">
+          </div>
+          <div class="session-detail">
+            <span class="label">相片</span>
+            <div class="photo-row">
+              <button id="btn-photo" class="sec-btn">📷 拍照</button>
+              <span id="photo-status" class="photo-status"></span>
+            </div>
+          </div>
+          <input type="file" id="photo-input" accept="image/*" capture="environment" class="hidden">
+          <img id="photo-preview" class="photo-preview hidden">
+          <button id="btn-checkout" class="primary-btn checkout-btn">🌟 出場</button>
+        </div>
+      </section>
+
+      <section id="checkin-section">
+        <div class="checkin-hero">
+          <div class="checkin-icon">🅿️</div>
+          <h2 class="checkin-heading">泊車 HK</h2>
+          <p class="checkin-sub">記錄泊車時間、估算費用、保存記錄</p>
+          <button id="btn-checkin" class="big-btn">入場</button>
+        </div>
+      </section>
+
+      <section id="actions" class="actions-row">
+        <button id="btn-estimate" class="action-btn">🔮 估算</button>
+        <button id="btn-carpark-select" class="action-btn">🅿 停車場</button>
+        <button id="btn-export" class="action-btn">📤 匯出</button>
+      </section>
+
+      <section id="summary" class="hidden summary-section">
+        <div class="summary-stat" id="summary-sessions">
+          <span class="summary-val" id="total-sessions">0</span>
+          <span class="summary-label">📋 次記錄</span>
+        </div>
+        <div class="summary-stat">
+          <span class="summary-val" id="total-spent">$0</span>
+          <span class="summary-label">總消費</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="estimator-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>🔮 費用估算</h2>
+        <button class="modal-close" id="est-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="field">
+          <span>停車場</span>
+          <select id="est-carpark"></select>
+        </label>
+        <label class="field">
+          <span>入場時間</span>
+          <input type="datetime-local" id="est-entry">
+        </label>
+        <label class="field">
+          <span>預計出場時間</span>
+          <input type="datetime-local" id="est-exit">
+        </label>
+        <div id="est-result" class="est-result hidden">
+          <div id="est-warning" class="warning-msg hidden">⚠️ 出場時間必須在入場時間之後</div>
+          <hr>
+          <div class="est-line"><span>時長</span><span id="est-duration"></span></div>
+          <div class="est-line"><span>收費時數</span><span id="est-charged"></span></div>
+          <div class="est-line"><span>費率</span><span id="est-rate"></span></div>
+          <div class="est-line est-total"><span>估算費用</span><span id="est-fee"></span></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="est-done" class="primary-btn">完成</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="carpark-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>🅿 選擇停車場</h2>
+        <button class="modal-close" id="cp-close">✕</button>
+      </div>
+      <div class="modal-body" id="carpark-list">
+      </div>
+    </div>
+  </div>
+
+  <div id="history-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>📋 泊車記錄</h2>
+        <button class="modal-close" id="hist-close">✕</button>
+      </div>
+      <div class="modal-body" id="history-list">
+        <p class="empty-msg">暫無泊車記錄。</p>
+      </div>
+      <div class="modal-footer">
+        <button id="hist-export" class="sec-btn">📤 匯出全部</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="detail-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>📄 詳細資料</h2>
+        <button class="modal-close" id="detail-close">✕</button>
+      </div>
+      <div class="modal-body" id="detail-body"></div>
+      <div class="modal-footer">
+        <button id="detail-done" class="primary-btn">完成</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="admin-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>🗓 公眾假期管理</h2>
+        <button class="modal-close" id="admin-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="admin-holiday-info">
+          <span id="admin-count">共 0 日</span>
+          <button id="admin-reset-btn" class="sec-btn">還原預設</button>
+        </div>
+        <div class="admin-add-row">
+          <input type="date" id="admin-add-input" class="admin-date-input">
+          <button id="admin-add-btn" class="sec-btn">➕ 新增</button>
+        </div>
+        <div id="admin-holiday-list" class="admin-holiday-list"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="admin-done" class="primary-btn">完成</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="checkout-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>🌟 出場</h2>
+        <button class="modal-close" id="co-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="field">
+          <span>入場時間</span>
+          <span id="co-entry" class="field-value"></span>
+        </label>
+        <label class="field">
+          <span>出場時間</span>
+          <input type="datetime-local" id="co-exit">
+        </label>
+        <label class="field">
+          <span>停車場</span>
+          <select id="co-carpark"></select>
+        </label>
+        <div id="co-no-fee-warning" class="warning-msg hidden">⚠️ 請選擇停車場或手動輸入費用</div>
+        <div id="co-calc" class="hidden">
+          <div id="co-warning" class="warning-msg hidden">⚠️ 出場時間必須在入場時間之後</div>
+          <hr>
+          <div class="est-line"><span>時長</span><span id="co-duration"></span></div>
+          <div class="est-line"><span>收費時數</span><span id="co-charged"></span></div>
+          <div class="est-line"><span>費率</span><span id="co-rate"></span></div>
+          <div class="est-line est-total"><span>計算費用</span><span id="co-fee"></span></div>
+        </div>
+        <div class="field">
+          <span>手動調整費用（可選）</span>
+          <div class="override-row">
+            <input type="number" id="co-manual-fee" placeholder="HKD" min="0" class="fee-input">
+            <input type="text" id="co-manual-reason" placeholder="原因" class="reason-input">
+          </div>
+        </div>
+        <label class="field">
+          <span>備註</span>
+          <input type="text" id="co-notes" placeholder="例如：B2, 近電梯">
+        </label>
+        <label class="field">
+          <span>相片</span>
+          <div class="photo-row">
+            <button id="co-btn-photo" class="sec-btn">📷</button>
+            <span id="co-photo-status"></span>
+          </div>
+        </label>
+        <input type="file" id="co-photo-input" accept="image/*" capture="environment" class="hidden">
+        <img id="co-photo-preview" class="photo-preview hidden">
+      </div>
+      <div class="modal-footer">
+        <button id="co-confirm" class="primary-btn">💾 儲存記錄</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
