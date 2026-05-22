@@ -117,5 +117,30 @@
         { "label": "星期五至日/假日", "from": "07:00", "to": "23:59", "hourly": 24, "days": [0,5,6] }
       ]
     }
+  },
+  {
+    "id": "apm",
+    "name": "APM 創紀之城5期",
+    "address": "觀塘道418號, 觀塘",
+    "scheme": {
+      "round_up": true,
+      "min_hours": 1,
+      "periods": [
+        { "label": "時租", "from": "00:00", "to": "23:59", "hourly": 28 }
+      ]
+    }
+  },
+  {
+    "id": "megabox",
+    "name": "MegaBox",
+    "address": "宏照道38號, 九龍灣",
+    "scheme": {
+      "round_up": true,
+      "min_hours": 1,
+      "periods": [
+        { "label": "平日 (一至五)", "from": "07:00", "to": "23:59", "hourly": 23, "days": [1,2,3,4,5] },
+        { "label": "週末/假日", "from": "07:00", "to": "23:59", "hourly": 26, "days": [0,6] }
+      ]
+    }
   }
 ]
