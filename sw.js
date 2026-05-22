@@ -1,4 +1,4 @@
-const CACHE = "parking-hk-v9";
+const CACHE = "parking-hk-v10";
 const FILES = ["/", "/index.html", "/style.css", "/app.js", "/data/carparks.json", "/manifest.json"];
 
 self.addEventListener("install", (e) => {

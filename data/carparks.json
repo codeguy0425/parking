@@ -158,7 +158,7 @@
       ]
     }
   },
-  {
+    {
     "id": "megabox",
     "name": "MegaBox",
     "address": "宏照道38號, 九龍灣",
@@ -168,6 +168,32 @@
       "periods": [
         { "label": "平日 (一至五)", "from": "07:00", "to": "23:59", "hourly": 23, "days": [1,2,3,4,5] },
         { "label": "週末/假日", "from": "07:00", "to": "23:59", "hourly": 26, "days": [0,6] }
+      ]
+    }
+  },
+  {
+    "id": "woo-kingswood-1",
+    "name": "+WOO 嘉湖一期",
+    "address": "嘉恩街, 天水圍",
+    "scheme": {
+      "round_up": true,
+      "min_hours": 1,
+      "periods": [
+        { "label": "平日 (一至五)", "from": "07:00", "to": "23:59", "hourly": 19, "days": [1,2,3,4,5] },
+        { "label": "週末/假日", "from": "07:00", "to": "23:59", "hourly": 22, "days": [0,6] }
+      ]
+    }
+  },
+  {
+    "id": "woo-kingswood-2",
+    "name": "+WOO 嘉湖二期",
+    "address": "天恩路12-18號, 天水圍",
+    "scheme": {
+      "round_up": true,
+      "min_hours": 1,
+      "periods": [
+        { "label": "平日 (一至五)", "from": "07:00", "to": "23:59", "hourly": 19, "days": [1,2,3,4,5] },
+        { "label": "週末/假日", "from": "07:00", "to": "23:59", "hourly": 22, "days": [0,6] }
       ]
     }
   }
