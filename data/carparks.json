@@ -118,6 +118,20 @@
       ]
     }
   },
+    {
+    "id": "golden-plaza",
+    "name": "萬金中心停車場",
+    "address": "水車館街28號, 元朗",
+    "scheme": {
+      "round_up": true,
+      "min_hours": 1,
+      "periods": [
+        { "label": "平日 (一至五)", "from": "07:00", "to": "23:59", "hourly": 25, "days": [1,2,3,4,5] },
+        { "label": "週末/假日", "from": "07:00", "to": "23:59", "hourly": 29, "days": [0,6] },
+        { "label": "夜泊", "from": "00:00", "to": "07:00", "hourly": 18 }
+      ]
+    }
+  },
   {
     "id": "apm",
     "name": "APM 創紀之城5期",
